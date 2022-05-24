@@ -19,5 +19,6 @@ namespace Brive.Bootcamp.Project.API
             });
         }
         public DbSet<Company> Company { get; set; }
+        public DbSet<User> User { get; set; }
     }
 }
