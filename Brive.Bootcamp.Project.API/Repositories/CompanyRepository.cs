@@ -28,14 +28,10 @@ namespace Brive.Bootcamp.Project.API.Repositories
                 }
                 if (order == 3)
                 {
-                    return context.Company.OrderByDescending(company => company.Date).ToList();
-                }
-                if (order == 4)
-                {
                     return context.Company.OrderBy(company => company.Date).ToList();
                 }
             }
-            return context.Company.ToList();
+            return context.Company.OrderByDescending(company => company.Date).ToList();
         }
 
         public List<Company> SaveCompany(Company company)
@@ -43,7 +39,7 @@ namespace Brive.Bootcamp.Project.API.Repositories
             context.Company.Add(company);
             context.SaveChanges();
 
-            return context.Company.ToList();
+            return context.Company.OrderByDescending(company => company.Date).ToList();
         }
     }
 }

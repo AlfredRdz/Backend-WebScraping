@@ -22,18 +22,18 @@ namespace Brive.Bootcamp.Project.API.Services
 
         public List<Company> SaveCompany(Company company)
         {
-                Company newCompany = new Company();
-                string search = company.Name.Replace(" ", "-");
-                string url = "https://www.occ.com.mx/empleos/de-" + search + "/";
-                HtmlWeb web = new HtmlWeb();
-                HtmlDocument htmlDoc = web.Load(url);
-                HtmlNode node = htmlDoc.DocumentNode.SelectSingleNode(@"//body/div[1]/div[2]/div[1]/div/div/div[2]/div/div/div[1]/p/text()[1]");
-                newCompany.Name = company.Name;
-                string numJobs = node.InnerText.Replace(",", "");
-                int num = int.Parse(numJobs);
-                newCompany.NumberJobs = num;
-                newCompany.Date = DateTime.UtcNow;
-                return _companyRepository.SaveCompany(newCompany);
+            Company newCompany = new Company();
+            string search = company.Name.Replace(" ", "-");
+            string url = "https://www.occ.com.mx/empleos/de-" + search + "/";
+            HtmlWeb web = new HtmlWeb();
+            HtmlDocument htmlDoc = web.Load(url);
+            HtmlNode node = htmlDoc.DocumentNode.SelectSingleNode(@"//body/div[1]/div[2]/div[1]/div/div/div[2]/div/div/div[1]/p/text()[1]");
+            newCompany.Name = company.Name;
+            string numJobs = node.InnerText.Replace(",", "");
+            int num = int.Parse(numJobs);
+            newCompany.NumberJobs = num;
+            newCompany.Date = DateTime.UtcNow;
+            return _companyRepository.SaveCompany(newCompany);
         }
     }
 

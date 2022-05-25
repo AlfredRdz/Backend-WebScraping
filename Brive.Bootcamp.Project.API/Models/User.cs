@@ -13,8 +13,11 @@ namespace Brive.Bootcamp.Project.API.Models
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [Column("Email")]
-        public string Email { get; set; }
+        [EmailAddress(ErrorMessage ="Ingrese un correo valido")]
+        [Required]
+        public string Email { get; set; } 
         [Column("Password")]
+        [Required]
         public string Password { get; set; }
     }
 }

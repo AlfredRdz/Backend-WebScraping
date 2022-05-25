@@ -28,7 +28,10 @@ namespace Brive.Bootcamp.Project.API.Controllers
         {
             try
             {
-                return StatusCode(StatusCodes.Status200OK, _userService.Authentication(user));
+                if (user.Email == string.Empty || user.Password == string.Empty)
+                    return StatusCode(StatusCodes.Status400BadRequest);
+                else
+                    return StatusCode(StatusCodes.Status200OK, _userService.Authentication(user));
             }
             catch
             {

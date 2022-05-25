@@ -26,27 +26,29 @@ namespace Brive.Bootcamp.Project.API.Controllers
         {
             try
             {
-                return StatusCode(StatusCodes.Status200OK, _companyService.SaveCompany(company));
+                if (company.Name == string.Empty)
+                    return StatusCode(StatusCodes.Status400BadRequest);
+                else
+                    return StatusCode(StatusCodes.Status200OK, _companyService.SaveCompany(company));
             }
-            catch (Exception e)
+            catch 
             {
-
-                throw new Exception(e.Message);
+                return StatusCode(StatusCodes.Status404NotFound);
             }
         }
 
         [HttpGet]
-        [Route("companys/{order}")]
+        [Route("{order}")]
         public ActionResult<List<Company>> GetOrdernadoCompanys(int order)
         {
             try
             {
                 return StatusCode(StatusCodes.Status200OK, _companyService.GetCompanys(order));
             }
-            catch (Exception e)
+            catch 
             {
 
-                throw new Exception(e.Message);
+                return StatusCode(StatusCodes.Status400BadRequest);
             }
         }
     }
